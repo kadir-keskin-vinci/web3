@@ -6,13 +6,17 @@ export class ExpensesService {
   private static dataPath = "./data/expenses.json";
   private static resetPath = "./data/expenses.init.json";
   
+ 
   public static getExpenses() {
-  return db.orm.public.Expense.all();
-}
-  
-  public static async addExpense(newExpense: NewExpense) {
-    return await db.orm.public.Expense.create(newExpense)
+    return db.orm.public.Expense.all();
   }
+
+  public static async addExpense(newExpense: NewExpense) {
+    return await db.orm.public.Expense.create({
+      ...newExpense
+    });
+  }
+
   
   public static resetExpenses(): Expense[] {
     this._resetExpenses();
