@@ -5,14 +5,14 @@ import { ExpensesService } from "../services/expenses.service.ts";
 import { isValidNewExpense } from "../guards/expenses.guard.ts";
 
 const expensesRouter = express.Router();
+
 expensesRouter.get("/", async (req, res) => {
   try {
-    const expenses = [];
-
-    for await (const expense of ExpensesService.getExpenses()) {
-      expenses.push(expense);
+    const expenses = await ExpensesService.getExpenses()
+    for(let i = 0; i<expenses.length; i++){
+      
+    console.log("exp:"+expenses[i].description);
     }
-
     res.json(expenses);
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });

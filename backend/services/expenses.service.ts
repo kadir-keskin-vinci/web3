@@ -7,8 +7,13 @@ export class ExpensesService {
   private static resetPath = "./data/expenses.init.json";
   
  
-  public static getExpenses() {
-    return db.orm.public.Expense.all();
+  public static async getExpenses(): Promise<Expense[]> {
+     const dbos = await db.orm.public.Expense.all();
+     const exp:Expense[] = [];
+     return  dbos.map((expense) => ({id: expense.id.toString(),date: expense.date,
+                                                  description: expense.description,
+                                                  payer: expense.payer,
+                                                  amount: expense.amount}))
   }
 
   public static async addExpense(newExpense: NewExpense) {

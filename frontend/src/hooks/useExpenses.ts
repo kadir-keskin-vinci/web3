@@ -25,11 +25,14 @@ function useExpenses(): UseExpensesResult {
       setLoading(true);
       setError(null);
       const response = await fetch(`${host}/expenses`);
+      console.log(response);
       if (!response.ok) {
         throw new Error(`Failed to fetch expenses (${response.status})`);
       }
       const data = (await response.json()) as Expense[];
       setExpenses(data);
+      console.log(data);
+      console.log(expenses  )
     } catch (err) {
       setError(errorMessage(err));
     } finally {

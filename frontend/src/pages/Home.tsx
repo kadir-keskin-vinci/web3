@@ -13,6 +13,7 @@ function Home() {
   const handleAlgoChange = (algo: (a: Expense, b: Expense) => number) => {
     setSortingAlgo(() => algo); // We're wrapping algo in a function because useState setter accept either a value or a function returning a value.
   };
+  
 
   const sortedExpenses = [...expenses].sort(sortingAlgo);
 
@@ -21,6 +22,7 @@ function Home() {
     <ExpenseAdd addExpense={addExpense} />
     <ExpenseReset resetExpenses={resetExpenses}/>
     <h2>Your expenses</h2>
+  
     {sortedExpenses.length > 0 && <ExpenseSorter setSortingAlgo={handleAlgoChange} />}
     <ul>
       {sortedExpenses.map((expense) => (
