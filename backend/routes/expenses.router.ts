@@ -1,4 +1,3 @@
-
 import express from "express";
 import type { Expense, NewExpense } from "../types/expense.ts";
 import { ExpensesService } from "../services/expenses.service.ts";
@@ -8,10 +7,9 @@ const expensesRouter = express.Router();
 
 expensesRouter.get("/", async (req, res) => {
   try {
-    const expenses = await ExpensesService.getExpenses()
-    for(let i = 0; i<expenses.length; i++){
-      
-    console.log("exp:"+expenses[i].description);
+    const expenses = await ExpensesService.getExpenses();
+    for (let i = 0; i < expenses.length; i++) {
+      console.log("exp:" + expenses[i].description);
     }
     res.json(expenses);
   } catch (error) {
@@ -30,6 +28,7 @@ expensesRouter.post("/", async (req, res) => {
 
     res.status(201).json(createdExpense);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
