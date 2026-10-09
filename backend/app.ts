@@ -3,6 +3,8 @@ import logger from "morgan";
 import cors from "cors";
 import expensesRouter from "./routes/expenses.router.ts";
 
+const PORT = process.env.PORT || 3000;
+
 const app = express();
 
 app.use(logger("dev"));
@@ -19,8 +21,8 @@ app.get("/ping", (req, res) => {
 
 app.use("/api/expenses", expensesRouter);
 
-app.listen(3000, () => {
-  console.log("Server listening on http://localhost:3000");
+app.listen(PORT, () => {
+  console.log("Server listening on http://localhost:" + PORT);
 });
 
 export default app;
